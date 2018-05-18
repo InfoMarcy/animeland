@@ -1,0 +1,9 @@
+<h1>Dirección Envío</h1>
+<div class="row" *ngIf="cart">
+  <div class="col-md-6 col-sm-6 col-xs-12">
+<app-shipping-form [cart]= "cart" [totalPrice]="totalPrice"></app-shipping-form>
+</div>
+<div class="col-md-6 col-sm-6 col-xs-12">
+  <app-shopping-cart-summary [cart]= "cart.products" [totalItemsCount]="cart.products.length" [totalPrice]="totalPrice"></app-shopping-cart-summary>
+</div>
+</div>

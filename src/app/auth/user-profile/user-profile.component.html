@@ -1,0 +1,64 @@
+<!-- check if the user is authenticated or logged in -->
+<div *ngIf="auth.user$ | async; then authenticated else guest">
+
+</div>
+<!-- not authenticated -->
+<ng-template #guest>
+
+<div class="container row">
+  <div class="col-xs 12 col-sm-10 col-md-8 offset-sm-1 offset-md-2">
+    <h3 class="text-center">Ingresa a tu cuenta, o <a routerLink="/register">Registrate</a></h3>
+    <div class="row">
+      <!-- <div class="col-xs-6 col-sm-6 col-md-6">
+        <a (click)="loginFacebook()" class="btn btn-lg btn-primary btn-block">Facebook</a>
+      </div> -->
+      <div class="col-xs-6 col-sm-6 col-md-6 offset-xs-3 offset-sm-3 offset-md-3">
+        <a (click)="auth.loginGoogle()" class="btn btn-lg btn-info btn-block">Google</a>
+      </div>
+    </div>
+    <div class="login-or">
+      <hr class="hr-or">
+      <span class="span-or">or</span>
+    </div>
+    <form autocomplete="off" novalidate [formGroup]="loginForm" (submit)="login()" role="form">
+
+      <div class="form-group">
+        <label for="inputUsernameEmail">Username or email</label>    
+        <input type="email" name="user" class="form-control" aria-placeholder="Correo Electronico" formControlName="email"/>
+      </div>
+      <div class="form-group">
+        <a class="pull-right" href="#">Forgot password?</a>
+        <label for="pass">Password</label>
+        <input type="password" name="pass"  class="form-control" aria-placeholder="Contraseña" formControlName="password" />
+      </div>
+      <div class="checkbox">
+        <label>
+          <input type="checkbox" >
+          Remember me </label>
+      </div>
+      <button type="submit" class="btn btn btn-primary" [disabled]="loginForm.invalid" name="login">
+        Log In
+      </button>
+
+      
+    </form>
+  </div>
+  <div class="col"></div>
+  </div>
+
+
+</ng-template>
+
+<!-- user is logged in -->
+<ng-template #authenticated>
+<div *ngIf="auth.user$ | async as user">
+  <h3 id="welcome">Bienvenido, {{user.displayName}}</h3>
+  <!-- <img [src]="user.photoURL" class="img-responsive" /> -->
+  <div class="text-center">
+  <button type="button" class="btn btn-primary btn-lg" (click)="goToStore()">Ir a la tienda</button>
+</div>
+  <!-- <p>UID: {{user.uid}}}</p> -->
+  <!-- <p>favorite color {{user.favoriteColor}}</p> -->
+</div>
+
+</ng-template>

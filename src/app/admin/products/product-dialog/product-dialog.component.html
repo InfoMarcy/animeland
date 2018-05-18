@@ -1,0 +1,76 @@
+<mat-tab-group class="app-toolbar">
+    <mat-tab label="Formulario de Producto">
+      <div >
+        <mat-form-field class="full-width">
+          <input matInput placeholder="Nombre" [(ngModel)]="data.name"/>
+        </mat-form-field>
+
+        <mat-form-field class="full-width">
+            <span matPrefix>MX$ &nbsp;</span>
+            <input matInput placeholder="Costo" [(ngModel)]="data.cost"/>
+          </mat-form-field>
+
+          <mat-form-field class="full-width">
+              <span matPrefix>MX$ &nbsp;</span>
+              <input matInput placeholder="Precio de venta" [(ngModel)]="data.price"/>
+            </mat-form-field>
+         
+            <mat-form-field class="full-width">
+                <mat-select matInput [(ngModel)]="data.category"  placeholder="Categoria">
+                    <mat-option>-</mat-option>
+                    <mat-option  *ngFor="let c of  categories" [value]="c.name  | lowercase"> {{c.name | uppercase}}</mat-option>
+                   
+                  </mat-select>
+              </mat-form-field>
+            
+              <mat-form-field class="full-width">
+                  <mat-select matInput [(ngModel)]="data.subcategory" placeholder="SubCategoria">
+                      <mat-option>-</mat-option>
+                      <div *ngFor="let c of categories">
+                          <mat-option  *ngFor="let sub of  c.subcategories" [value]="sub.name  | lowercase">{{sub.name | uppercase}}</mat-option>
+
+                      </div>
+                    
+                    </mat-select>
+                </mat-form-field>
+
+              <mat-form-field class="full-width" *ngIf="data.id == null">
+                  <input matInput placeholder="Cantidad de articulos" [(ngModel)]="data.stock_quantity"/>
+                </mat-form-field>
+
+                <mat-form-field class="full-width">                   
+                    <mat-select matInput [(ngModel)]="data.stock_location" placeholder="Lugar">
+                        <mat-option>-</mat-option>
+                        <mat-option  *ngFor="let item of stock_location" [value]="item.id">{{item.location}}</mat-option>
+                      </mat-select>
+                  </mat-form-field>
+                  <mat-form-field class="col">
+                      <textarea matInput placeholder="Descripción" [(ngModel)]="data.description"></textarea>
+                    </mat-form-field>
+                    <br/>
+                    <button mat-raised-button color="accent"  (click)="saveProduct()" >Guardar</button>
+
+      </div>
+    </mat-tab>
+
+    <mat-tab label="Adjuntar Archivos" *ngIf="data.id" style="max-height:200px;">
+
+<div style="min-height: 200px;">
+  <app-upload-form [id]="data.id"></app-upload-form>
+  <mat-grid-list cols="2">
+<mat-grid-tile *ngFor="let upload of uploads | async">
+
+  
+    <figure class="figure col-6">
+        <img max-width="100;" [src]="upload.url" alt="upload.name"  class="figure-img img-fluid rounded img-thumbnail">
+        <figcaption class="figure-caption"><button mat-raised-button color="warn" (click)="removeUpload(upload)" class="btn-block">Eliminar</button></figcaption>
+      </figure>
+   
+
+
+  
+</mat-grid-tile>
+  </mat-grid-list>
+</div>
+    </mat-tab>
+  </mat-tab-group>

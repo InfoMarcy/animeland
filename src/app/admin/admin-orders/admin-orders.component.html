@@ -1,0 +1,75 @@
+<h3>Ordenes</h3>
+<div class="example-container mat-elevation-z8">
+                <div class="example-header">
+                  <!-- <mat-form-field>
+                    <input matInput (keyup)="applyFilter($event.target.value)"  placeholder="Buscar">
+                  </mat-form-field>
+                </div> -->
+
+                <mat-table #table [dataSource]="dataSource"  matSort [trackBy]="trackById" class="table animate">             
+                
+              
+                  <!-- id Column -->
+                  <ng-container matColumnDef="id" class="d-none d-md-block">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header> <span class="text-primary font-weight-bold">ID: </span> </mat-header-cell>
+                    <mat-cell *matCellDef="let element">
+                        <span class="mobile-label">ID:</span>
+                      {{element.id}} 
+                    </mat-cell>
+                  </ng-container>
+              
+                  <!-- Weight Column -->
+                  <ng-container matColumnDef="created_at">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header> <span class="text-primary font-weight-bold">Fecha: </span> </mat-header-cell>
+                    <mat-cell *matCellDef="let element">
+                        <span class="mobile-label">Fecha:</span>
+                       {{element.created_at | date:"dd-LLLL-yyyy"}} 
+                      </mat-cell>
+                  </ng-container>
+
+                    <!-- name Column -->
+                    <ng-container matColumnDef="customer">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header> <span class="text-primary font-weight-bold">Cliente: </span> </mat-header-cell>
+                        <mat-cell *matCellDef="let element"> 
+                            <span class="mobile-label">Cliente:</span>
+                          {{element.shipping.firstName + ' ' + element.shipping.lastName}}
+                         </mat-cell>
+                      </ng-container>
+              
+                  <!-- Symbol Column -->
+                  <ng-container matColumnDef="amount">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header> <span class="text-primary font-weight-bold">Importe pedido: </span> </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> 
+                        <span class="mobile-label">Importe pedido:</span>
+                      {{element.amount | currency:'MXN'}} 
+                    </mat-cell>
+                  </ng-container>
+
+                   <!-- Symbol Column -->
+                   <ng-container matColumnDef="totalProducts">
+                                <mat-header-cell *matHeaderCellDef mat-sort-header> <span class="text-primary font-weight-bold">Número de productos: </span> </mat-header-cell>
+                                <mat-cell *matCellDef="let element">
+                                    <span class="mobile-label">Número de productos:</span>
+                                   {{element.totalProducts}}
+                                   </mat-cell>
+                              </ng-container>
+
+
+
+                               <!-- Symbol Column -->
+                  <ng-container matColumnDef="detail">
+                                <mat-header-cell *matHeaderCellDef mat-sort-header> <span class="text-primary font-weight-bold"></span> </mat-header-cell>
+                                <mat-cell *matCellDef="let element">
+                                    <span class="mobile-label"></span> 
+                                <a mat-raised-button color="primary" routerLink="/mis/ordenes/detalles/{{element.id}}">Detalle:</a>  
+                                </mat-cell>
+                              </ng-container>
+
+
+                  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                  <mat-row *matRowDef="let row; columns: displayedColumns;" class="animate"></mat-row>
+                </mat-table>
+
+                <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+              </div>
+              

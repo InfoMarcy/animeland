@@ -1,0 +1,31 @@
+.card {
+    text-transform:  capitalize;
+}
+.row {
+    margin-left: -15px;
+    margin-right: -15px;
+}
+
+.course-listing {
+    cursor: pointer;
+    height: 200px;
+    margin-bottom: 5px;
+    padding: 0;
+}
+
+.course-listing .course-box-image-container {
+    max-height: 208px;
+    overflow: hidden;
+}
+.course-listing .course-box-image-container .course-box-image {
+    border-top-left-radius: 9px;
+    border-top-right-radius: 9px;
+    display: block;
+    margin: auto;
+    width: 100%;
+}
+img {
+    vertical-align: middle;
+    max-height: 350px;
+    border: 0 none;
+}

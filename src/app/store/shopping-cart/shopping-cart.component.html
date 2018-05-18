@@ -1,0 +1,66 @@
+
+<h1>Carrito</h1>
+ 
+<div class="container" *ngIf=" totalPrice === 0">
+  <p class="lead">El carrito esta vacio</p>
+  <a routerLink="/" class="btn btn-primary">Ir a la tienda</a>
+</div>
+
+<div >
+  
+</div>
+<div class="col-md-10 col-sm-10 col-xs-10 offset-xs-1 offset-sm-1 offset-md-1" *ngIf="cart && cart.products.length > 0">
+    <p class="lead">Tienes {{  cart.products.length }} artículos en tu carrito.
+
+      <button (click)="clearCart()" class="btn btn-light btn-sm float-right">Limpiar el carrito</button>
+    </p>
+    <div class="table-responsive">
+<table class="table table-hover">
+<thead>
+  <tr>
+    <th></th>
+    <th>Productos</th>
+    <th  class="text-center" style="width:auto">Cantidad</th>
+    <th class="text-right">Precio unitario</th>
+    <th class="text-right">Importe</th>
+    <th></th>
+  </tr>
+</thead>
+<tbody  *ngIf="cart && cart.products.length">
+  
+  <tr *ngFor="let item of cart.products">
+    <td>
+<div [style.backgroundImage]="'url(' + item.image.url + ')'" class="thumbnail">
+    
+ </div>
+      
+    </td>
+    <td>  {{ item.name }} </td>
+    <td>
+        
+               <input class="text-center"  type="number" 
+               [value]="item.quantity" #qty name="updateQuantity" 
+               (keyup.enter)="update(item, $event)"/> 
+
+    </td>
+    <td class="text-right">{{item.price | currency:'MXN'}}</td>
+    <td class="text-right"> {{ item.price * item.quantity   | currency:'MXN'}}</td>
+    <td> <a (click)="remove(item)" class="text-danger remove_a">eliminar</a></td>
+  </tr>
+</tbody>
+<tfoot>
+<tr>
+  <th></th>
+  <th></th>  
+  <th></th>
+  <th class="text-right text-primary"><strong>Total:</strong></th>
+  <th class="text-right">{{ totalPrice | currency:'MXN'}}</th>
+</tr>
+
+</tfoot>
+</table>
+</div>
+<a routerLink="/" class="btn btn-info">Seguir Comprando</a>
+<a routerLink="/check-out" class="btn btn-primary">Proceder al pago</a>
+
+</div> 

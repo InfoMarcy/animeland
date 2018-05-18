@@ -1,0 +1,50 @@
+<div class="example-container mat-elevation-z8">
+    <div class="example-header">
+      <mat-form-field>
+        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Buscar" [(ngModel)]="filterTXb" [value]="filterTXb"
+          name="filterTXb">
+      </mat-form-field>
+    </div>
+    <mat-table #table [dataSource]="dataSource" matSort class="animate">
+  
+  
+      <!--product Name  -->
+      <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>
+          <span class="text-primary font-weight-bold">Nombre: </span>
+        </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.displayName}} </mat-cell>
+      </ng-container>
+  
+  
+  
+      <!-- user email -->
+      <ng-container matColumnDef="email">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>
+          <span class="text-primary font-weight-bold">Email: </span>
+        </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.email}} </mat-cell>
+      </ng-container>
+
+       
+      <!-- user email -->
+      <ng-container matColumnDef="roles">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>
+          <span class="text-primary font-weight-bold">Roles: </span>
+        </mat-header-cell>
+        <mat-cell *matCellDef="let element">          
+                <mat-checkbox [(ngModel)]="element.roles.admin" name="makeAdmin" (change)="updateAdmin($event, element)"  >Administrador</mat-checkbox>
+                <mat-checkbox [(ngModel)]="element.roles.vendedor" name="makeVendedor" (change)="updateManager($event, element)">Vendedor</mat-checkbox>
+              
+        </mat-cell>
+      </ng-container>
+
+
+      
+  
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;" class="animate"></mat-row>
+    </mat-table>
+  
+    <mat-paginator [pageSizeOptions]="[1,10,20,25,50]"></mat-paginator>
+  </div>

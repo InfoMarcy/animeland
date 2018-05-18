@@ -1,0 +1,67 @@
+
+<div class="card" *ngIf="product.name">
+    <p class="lead bg-light">{{product.category}}</p>
+
+
+    <div classs="course-listing">
+    <div class=" course-box-image-container">
+  <img  [src]="product.uploads[0].url"  class="course-box-image"
+  *ngIf="product.uploads[0]"  (click)="goToDetails(product.id)"
+  alt="{{product.name}}">
+
+  </div>
+</div>
+  <div class="card-body">
+      <h6 class="card-title">
+        <a>{{product.name}}</a>
+      </h6>
+      <p class="info"><strong>{{product.price | currency:'MXN'}}</strong></p>
+      <!-- <p class="card-text">{{product.description}}</p> -->
+    </div>
+ 
+  <div class="card-footer" *ngIf="showActions" >
+   
+      <div class="row">
+        
+          <ng-template #noProductOnCart>
+        <input class="col-4" 
+        id="productQuantity" data-validate="number" name="quantity" 
+        type="number" min="0" max="3494" maxlength="4" 
+        title="Cantidad de unidades" 
+        [value]="getQuantity()" 
+        oninput="this.value=this.value.slice(0,this.maxLength||1/1);this.value=(this.value   < 0) ? (1/1) : this.value;"
+        autocomplete="off" 
+        tabindex="2"
+        #productQuantity>
+
+
+        <div class="col  float-right">
+            <button  (click)="update(productQuantity.value)"  
+            class="btn btn-info btn-block">
+
+            
+           
+             Agregado al carrito
+         
+          
+           
+          
+          </button>
+        </div>
+      </ng-template>
+
+      <div class="col  float-right" *ngIf="getQuantity() == 0 else noProductOnCart">
+          <button  (click)="addToCart()"  
+          class="btn btn-info btn-block">
+
+          <span >
+              Agregar al carrito
+          </span>
+   </button>
+      </div>
+
+
+      </div> 
+       
+  </div>
+</div>

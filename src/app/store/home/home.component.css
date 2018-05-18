@@ -1,0 +1,116 @@
+.sticky-top{
+    top:6rem;
+    background-color: #fff;  
+  /* box-shadow: 0 2px 16px 0 rgba(0,0,0,0.08);  */
+  padding-right : 0px;
+  padding-left : 0px;
+}
+.site-nav {
+    margin-left: -20px;
+    white-space: nowrap;
+}
+
+.list--inline {
+    padding: 0;
+    margin: 0;
+}
+
+
+ul, menu, dir {
+    display: block;
+    list-style-type: disc;
+    -webkit-margin-before: 1em;
+    -webkit-margin-after: 1em;
+    -webkit-margin-start: 0px;
+    -webkit-margin-end: 0px;
+    -webkit-padding-start: 40px;
+}
+
+#subNavbar ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: visible;
+}
+
+#subNavbar li {
+
+    display: inline-block;
+    padding-right: 5px;
+    padding-left: 5px;
+    padding-top:0;
+    margin-top:0;
+  
+}
+
+#subNavbar li a { 
+    text-align: center;
+    font-weight: 600;
+    color: #666;
+    text-transform: uppercase;
+    padding: 13px;
+    display: block;
+}
+
+#subNavbar li a:hover {
+    color: #eb3349;
+}
+
+#subNavbar{
+margin-top: 0;
+padding-top: 0;
+
+}
+
+.tales {
+    width: 100%;
+  }
+  .carousel-inner{
+    width:100%;
+    max-height: 330px !important;
+  }
+
+
+  .borderless td, .borderless th {
+    border: none;
+}
+
+/* drop down menu */
+.dropdown-toggle::after {
+    display:none
+}
+
+#makeTransparent .btn-default, #makeTransparent > .btn-default:active, 
+#makeTransparent > .btn-default:focus{
+    
+
+    background:transparent;
+    border: none;
+    outline: none;
+    box-shadow: none;
+    display: inline-block;
+    padding-right: 5px;
+    padding-left: 5px;
+    padding-top:0;
+    margin-top:0;
+    text-align: center;
+    font-weight: 600;
+    color: #666;
+    text-transform: uppercase;
+    padding: 13px;
+    display: block;
+   
+  
+}
+
+#makeTransparent:hover .btn-default:hover {
+    color: #eb3349;
+}
+
+.dropdown-menu li:hover .sub-menu {
+    visibility: visible;
+  }
+
+  .dropdown:hover .dropdown-menu {
+    display: block;
+  }

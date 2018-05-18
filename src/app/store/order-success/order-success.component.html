@@ -1,0 +1,6 @@
+<h3>Gracias Por tu compra!</h3>
+<p class="lead" *ngIf="appUser">Hola, {{appUser.displayName | lowercase}}, gracias por comprar en nuestra tienda. Tu Número de orden es: {{orderId}}</p>
+
+
+<app-order-details></app-order-details>
+<a routerLink="/" class="btn btn-info btn-block ">Continuar Comprando</a>

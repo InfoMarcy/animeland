@@ -1,0 +1,7 @@
+input {
+  text-transform: capitalize;
+}
+table { border-collapse:collapse }
+
+
+.table th { border-top: none; }

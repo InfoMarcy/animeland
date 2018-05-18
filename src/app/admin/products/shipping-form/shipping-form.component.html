@@ -1,0 +1,52 @@
+<form class="form-horizontal" #f="ngForm" (ngSubmit)="placeOrder(shipping)">
+  <div class="form-group">
+    <label for="firstName">Nombre(s):</label>
+    <input [(ngModel)]="shipping.firstName"  #firstName="ngModel" 
+    name="firstName" type="text"  class="form-control" id="firstName" required>
+    <div class="alert alert-danger" *ngIf="firstName.touched && firstName.invalid">
+      El Nombre es requerido.
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="lastName">Apellido(s):</label>
+    <input  [(ngModel)]="shipping.lastName" #lastName="ngModel"
+     name="lastName" type="text" class="form-control" id="LastName" required>
+    <div class="alert alert-danger" *ngIf="lastName.touched && lastName.invalid">
+      El Apellido es requerido.
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="address">Dirección:  </label>
+    <input [(ngModel)]="shipping.address" name="address" #address="ngModel" 
+    type="text" class="form-control" id="address" required>
+    <div class="alert alert-danger" *ngIf="address.touched && address.invalid">
+      La Dirección es requerido.
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="address2">Dirección 2: </label>
+    <input [(ngModel)]="shipping.address2" name="address2"  type="text" 
+    class="form-control" id="address2" placeholder="Departamento o Piso">
+  </div>
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="city">Ciudad</label>
+      <input [(ngModel)]="shipping.city" #city="ngModel" name="city"  
+      type="text" class="form-control" id="city" required>
+      <div class="alert alert-danger" *ngIf="city.touched && city.invalid">
+        La ciudad es requerido.
+      </div>
+    </div>
+    <div class="form-group col">
+      <label for="postalCode">Codigo Postal</label>
+      <input  [(ngModel)]="shipping.postalCode" name="postalCode" #postalCode="ngModel" 
+      type="text" class="form-control" id="postalCode" required>
+      <div class="alert alert-danger" *ngIf="postalCode.touched && postalCode.invalid">
+        La ciudad es requerido.
+      </div>
+    </div>
+  </div>
+  <button [disabled]="!f.valid" type="submit" class="btn btn-primary">Comprar</button>
+</form>

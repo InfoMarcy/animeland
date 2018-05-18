@@ -1,0 +1,27 @@
+<div style="margin: 5% 15%">
+  
+  <div *ngIf="currentFileUploaded" style="width:350px;">
+
+    <p>{{progress.percentage}}</p>
+    <p>
+    <mat-progress-bar 
+    [color]="primary" 
+    [mode]="buffer"
+    [value]="progress.percentage" 
+    [bufferValue]="progress.percentage">
+  </mat-progress-bar>
+  <br />  
+</p>
+  </div>
+     
+  <div class="row"> 
+    
+    <!-- <label class="btn btn-light col-4"> Añadir imagenes <fa name="fal fa-plus-circle" class="text-primary"></fa>  -->
+      <input type="file" (change)="selectFile($event)"   class="btn btn-light col-6 text-primary"  />
+    <!-- </label> -->
+    <div class="col-1"></div>
+      <button mat-raised-button color="primary"  [disabled]="!selectedFiles" 
+      (click)="upload()"  class="col">Subir Archivo</button>
+    </div>
+
+</div>

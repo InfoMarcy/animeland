@@ -1,0 +1,18 @@
+.thumbnail{
+    width: 100px;
+    height: 100px;
+    border-radius: 100%;
+    background-size: cover;
+}
+.borderless td, .borderless th {
+    border: none;
+    
+}
+
+a, a:hover{
+    cursor: pointer;
+}
+
+.table-hover {
+    cursor: pointer;
+}

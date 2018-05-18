@@ -1,0 +1,69 @@
+input, td {
+  text-transform: capitalize;
+}
+
+mat-cell {
+text-transform: capitalize;
+}
+
+
+.example-container {
+  display: flex;
+  flex-direction: column;
+  /* min-width: 300px; */
+}
+
+.example-header {
+  min-height: 64px;
+  padding: 8px 24px 0;
+
+}
+
+.mat-form-field {
+  font-size: 14px;
+  width: 100%;
+}
+
+.mat-table {
+  overflow: auto;
+  max-height: 500px;
+}
+
+
+.example-container {
+  display: flex;
+  flex-direction: column;
+  max-height: 500px;
+  min-width: 300px;
+}
+
+
+
+.mat-table {
+  overflow: auto;
+  max-height: 500px;
+}
+
+.mobile-label {
+  display: none;
+}
+
+@media(max-width: 600px) {
+  .mobile-label {
+    width: 170px;
+    display: inline-block;
+        font-weight: bold;
+  }
+
+  .mat-header-row {
+    display: none;
+  }
+  .example-header {
+    display: none;
+  }  
+  .mat-row { 
+    flex-direction: column;
+    align-items: start;
+    padding: 8px 24px;
+  }
+}

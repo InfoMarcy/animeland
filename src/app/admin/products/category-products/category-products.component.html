@@ -1,0 +1,155 @@
+      <form #f="ngForm" (ngSubmit)="onSubmit(f.value)" class="form col s6" role="form">
+          <h5 class="float-left">Agregar Categoria</h5>
+        <div class="row col-lg-6 col-md-6 col-xs-12 col-sm-12">
+            <div class="form-group col">
+            <input type="text" class="form-control" placeholder="categoria"
+             [(ngModel)]="category.name" id="name" name="name" #name="ngModel" required />
+          
+          </div>
+        
+          <div class="form-group col-3">             
+              <button type="submit" class="btn btn-primary" [disabled]="f.invalid">Agregar</button>
+          </div>         
+        </div>
+      </form>
+      <div class="table-responsive">
+      <table class="table" *ngIf="categories?.length > 0;else noItems">
+        <thead>
+          <tr class="text-primary font-weight-bold">
+            <th>No. </th>
+            <th>Categoria </th>
+            <th>SubCategorias</th>
+            <th></th> 
+            <th></th>  
+                
+           </tr>
+        </thead>
+        <tr *ngFor="let category of categories; let i = index">
+          <td>{{i + 1}}</td>
+          <td> <ng-template #noEdit> <span class="lead text-capitalize">{{category.name | lowercase}}</span></ng-template>
+            <!-- if the edit button is clicked how form -->
+            <div *ngIf="editState && categoryToEdit.id == category.id; else noEdit">
+              <form #form="ngForm" (ngSubmit)="update(category)">
+
+                 
+                    <div class="row">
+            
+                        <label for="name" class="control-label col-lg-3 col-md-12 col-sm-12 col-xs-12"><span class="lead">{{category.name | uppercase}}</span></label>
+                        <div class="form-group col">                         
+                        <input type="text" class="form-control" placeholder="agregar categoria"
+                         [(ngModel)]="category.name" id="name" name="name" #name="ngModel" required />
+                         <div class="alert alert-danger" *ngIf="name.touched && name.invalid">
+                          La Categoria es requerida.
+                          </div>
+                      </div>
+                    
+                      <div class="form-group col-lg-3 col-md-12 col-sm-12 col-xs-12">             
+                          <button type="submit" class="btn btn-primary" [disabled]="form.invalid" >Actualizar</button>
+                        
+                      </div>  
+                      
+                      <div class="form-group col-lg-3 col-md-12 col-sm-12 col-xs-12">             
+                          
+                          <button type="button" class="btn btn-default" (click)="clearState()">Cancelar</button>
+                      </div>   
+                
+                    </div>
+              </form>
+            </div>
+
+
+            <!-- if the edit button is clicked how form -->
+            <div *ngIf="editSubState && SubcategoryToEdit.id == category.id;">
+              <form #f="ngForm" (ngSubmit)="updateSubCategory(category, f.value)">
+
+                 
+                    <div class="row">            
+                        <label for="name" class="control-label col-lg-3 col-md-12 col-sm-12 col-xs-12"></label>
+                        <div class="form-group col">                         
+                        <input type="text" class="form-control" placeholder="agregar subCategoria"
+                         [(ngModel)]="subCategories.name" id="name" name="name" #name="ngModel" required />
+                         <div class="alert alert-danger" *ngIf="name.touched && name.invalid">
+                          La SubCategoria es requerida.
+                          </div>
+                      </div>
+                    
+                      <div class="form-group col-lg-3 col-md-12 col-sm-12 col-xs-12">             
+                          <button type="submit" class="btn btn-primary" [disabled]="f.invalid" >Agregar SubCategoria</button>
+                      </div>  
+                      <div class="form-group col-lg-3 col-md-12 col-sm-12 col-xs-12">            
+                          <button type="button" class="btn btn-default" (click)="clearSubState()">Cancelar</button>
+                      </div>         
+                
+                    </div>
+              </form>
+            </div>
+
+
+
+
+
+
+
+
+
+
+
+          </td>
+
+          <td>
+
+              <ul>
+                <li *ngFor="let c of  category.subcategories">
+                  <div class="row">
+<div class="col-9"><a class="lead text-capitalize">{{c.name}}</a></div>
+<div class="col-3"> 
+  
+    <fa   class="text-secondary" name="fas fa-trash fa-1.5x"
+    (click)="removeSubCategory(c, category.id)"></fa>
+ 
+
+                  </div>
+                </div>
+                 
+                 </li>
+              </ul>
+            
+        
+          </td>
+          <!-- agregar subcategoria -->
+          <td>
+            
+            <ng-template #noSubCategory><fa name="fas fa-plus-circle fa-2x" class="text-primary"
+                (click)="editSubcategory(category)"></fa></ng-template>
+    
+    <fa *ngIf="editSubState && SubcategoryToEdit.id == category.id; else noSubCategory" name="fas fa-compress fa-2x"
+    class="text-primary" (click)="clearSubState()"></fa> 
+
+
+           </td>
+          <!-- edit -->
+          <td >
+            <ng-template #noCategory><fa name="fas fa-edit fa-2x" class="text-primary"
+               (click)="edit(category)"></fa></ng-template>
+   
+   <fa *ngIf="editState && categoryToEdit.id == category.id; else noCategory" name="fas fa-compress fa-2x"
+   class="text-primary" (click)="clearState()"></fa>   
+            </td>
+            <!-- delete -->
+           <td>
+            
+              <fa   class="text-muted float-right text-dark" name="fas fa-minus-circle fa-2x"
+              (click)="delete(category.id)"></fa>
+           </td>
+     
+        </tr>
+
+      </table>
+    </div>
+
+      <ng-template #noItems>
+          <hr>
+          <h5>No hay categorias para mostrar</h5>
+        </ng-template>
+
+  

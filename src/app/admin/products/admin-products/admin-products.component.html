@@ -1,0 +1,129 @@
+<p>
+  <a (click)="addProduct()" class="btn btn-primary">Agregar Nuevo Producto</a>
+</p>
+
+<div class="example-container mat-elevation-z8">
+  <div class="example-header">
+    <mat-form-field>
+      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Buscar">
+    </mat-form-field>
+  </div>
+
+  <mat-table #table [dataSource]="dataSource" matSort [trackBy]="trackById" class="animate">
+
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>
+        <span class="text-primary font-weight-bold">Nombre: </span>
+      </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+    </ng-container>
+
+    <!-- Weight Column -->
+    <ng-container matColumnDef="description">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>
+        <span class="text-primary font-weight-bold">Descripcion: </span>
+      </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.description}} </mat-cell>
+    </ng-container>
+
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="price">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>
+        <span class="text-primary font-weight-bold">Precio: </span>
+      </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.price | currency:'MXN'}} </mat-cell>
+    </ng-container>
+
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="category">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>
+        <span class="text-primary font-weight-bold">Categoria: </span>
+      </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.category}} </mat-cell>
+    </ng-container>
+
+    <!-- inventory quantity -->
+    <ng-container matColumnDef="stock_quantity">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>
+        <span class="text-primary font-weight-bold">Cantidad en inventario: </span>
+      </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        {{element.stock_quantity}}
+      </mat-cell>
+    </ng-container>
+    <!-- update form -->
+    <ng-container matColumnDef="update">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>
+        <span class="text-primary font-weight-bold"></span>
+      </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+
+            <!-- if the edit button is clicked how form -->
+            <div *ngIf="editState && productToEdit.id == element.id;">
+              <form #f="ngForm" (ngSubmit)="updateProductInventoryQty(element, f.value)">
+
+
+                <div class="row">
+                  <div class="form-group col-10">
+                    <label class="label-control">Cantidad</label>
+                    <input type="number" class="form-control" [(ngModel)]="productToInventory.stock_quantity"
+                      id="stockQuantity" name="stockQuantity" #stockQuantity="ngModel" required />
+                  
+                  </div>
+
+                  <div class="form-group col-12">
+                    <button type="submit" class="btn btn-primary" [disabled]="f.invalid || stockQuantity.value < 1">Agregar</button>
+                  
+                  </div>
+
+                </div>
+              </form>
+            </div>
+        
+
+
+
+      </mat-cell>
+    </ng-container>
+
+
+    <ng-container matColumnDef="action">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <ng-template #noProductInventory>
+          <fa name="fas fa-plus-circle fa-2x" class="text-primary" (click)="edit(element)"></fa>
+        </ng-template>
+
+        <fa *ngIf="editState && productToEdit.id == element.id; else noProductInventory" name="fas fa-compress fa-2x" class="text-primary"
+          (click)="clearState()"></fa>
+      </mat-cell>
+    </ng-container>
+
+    <!-- edit Column -->
+    <ng-container matColumnDef="edit">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <a class="text-primary" (click)="openDialog(element)">
+          <fa name="fas fa-edit fa-2x"></fa>
+        </a>
+      </mat-cell>
+    </ng-container>
+
+    <!-- delete Column -->
+    <ng-container matColumnDef="delete">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <a class="text-warn" (click)="remove(element)">
+          <fa class="text-muted float-right" name="fas fa-minus-circle fa-2x" class="text-dark"></fa>
+        </a>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;" class="animate"></mat-row>
+  </mat-table>
+
+  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+</div>
